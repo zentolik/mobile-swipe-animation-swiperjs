@@ -1,3 +1,6 @@
+# mobile swipe animation (swiperjs)
+![](docs/docfx/images/MixtureOpen.gif)
+
 ## CMS4
 1. Fügt in euren "**.swiper-container**" ein **CMS4-HTML-Element** ein.
 2. Füge in das **CMS4-HTML-Element** den Inhalt von "**swipe-animation__html.html**" ein.
