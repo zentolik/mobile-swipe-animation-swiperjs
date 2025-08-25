@@ -1,0 +1,131 @@
+.swiper-container {
+    // swiper (mobile-) animation styles
+    position: relative;
+    
+    //// animation icon settings
+    $swipe-ani-icon__offset:            0px; // bottom offset of the animated icon(s)
+    $swipe-ani-icon__size:              34px; // size (height) of both icons (phone and finger)
+    $swipe-ani-icon__stroke-clr:        color-text(background); // stroke color of both icons (phone and finger)
+    $swipe-ani-icon__stroke-width:      30px; // stroke thickness of both icons (phone and finger)
+    $swipe-ani-icon__stroke-fill-phn:   none; // fill color of phone icon
+    $swipe-ani-icon__stroke-fill-fng:   color(background); // fill color of finger icon (give it the current background color)
+    $swipe-ani-icon__hover-opa:         0.45; // opacity of icon on hover / focus
+    
+    //// animation settings
+    $swipe-animation__time:             1.8s; // duration of animation
+    $swipe-animation__hover-pause:      false; // true = pause animation by hovering the swiper
+    
+    //// animation prev/next buttons settings
+    $swiper-buttons__styles:            true; // true = activate prev/next button style settings
+    $swiper-buttons__offset:            20px; // side offsets of prev/next buttons
+    $swiper-buttons__size:              20px; // size (height) of prev/next buttons
+    $swiper-buttons__color:             $swipe-ani-icon__stroke-clr; // color of prev/next buttons
+    
+    // ! DON'T CHANGE THE FOLLOWING !
+    $swipe-ani-icon__ratio: 10 / 17; // icon aspect ratio ! DON'T CHANGE !
+    $swipe-ani-icon__width: $swipe-ani-icon__size * $swipe-ani-icon__ratio; // calculated icon width ! DON'T CHANGE !
+    .swipe-animation {
+
+        @keyframes swiper-move-finger {
+            0% {transform: translateX(rem(3px)) scale(.9);}
+            15% {transform: translateX(rem(calc(#{$swipe-ani-icon__width} - 9px))) scale(.9);}
+            20% {transform: translateX(rem(calc(#{$swipe-ani-icon__width} - 8px))) scale(.9);}
+            25% {transform: translateX(rem(calc(#{$swipe-ani-icon__width} - 7px))) scale(.9);}
+            50% {transform: translateX(rem(calc(#{$swipe-ani-icon__width} - 8px))) scale(1);}
+            65% {transform: translateX(rem(4px)) scale(1);}
+            70% {transform: translateX(rem(3px)) scale(1);}
+            75% {transform: translateX(rem(2px)) scale(1);}
+            100% {transform: translateX(rem(3px)) scale(.9);}
+        }
+
+        @extend %animated-transform;
+        transition-property: opacity;
+        transition-timing-function: ease-in-out;
+        body:not(.cms-liveeditor-is-opened) & {
+            position: absolute;
+            bottom: rem($swipe-ani-icon__offset);
+            left: 50%;
+            height: rem($swipe-ani-icon__size);
+            width: rem($swipe-ani-icon__width);
+            transform: translate(-50%, 100%);
+            z-index: 2;
+        }
+
+        svg {
+            body:not(.cms-liveeditor-is-opened) & {
+                position: absolute;
+            }
+            stroke: $swipe-ani-icon__stroke-clr;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-width: rem($swipe-ani-icon__stroke-width);
+            &.swiper-icon-phone {
+                fill: $swipe-ani-icon__stroke-fill-phn;
+                height: rem($swipe-ani-icon__size);
+            }
+            &.swiper-icon-finger {
+                fill: $swipe-ani-icon__stroke-fill-fng;
+                bottom: -15%;
+                transform: translateX(rem(3px));
+                height: rem(calc(0.588 * #{$swipe-ani-icon__size}));
+                animation: swiper-move-finger $swipe-animation__time .75s linear infinite;
+            }
+        }
+
+        // hide animated swiper icons and buttons
+        @include breakpoint(giant) {
+            body:not(.cms-liveeditor-is-opened) & {
+                display: none;
+            }
+        }
+
+        // swiper prev/next buttons
+        @if $swiper-buttons__styles {
+            .swiper-button-prev,
+            .swiper-button-next {
+                --swiper-navigation-sides-offset: #{rem(calc(#{$swipe-ani-icon__width} + #{$swiper-buttons__offset}))};
+                --swiper-navigation-size: #{rem($swiper-buttons__size)};
+                --swiper-navigation-color: #{$swiper-buttons__color};
+                @extend %animated-transform;
+                transition-property: padding;
+                transition-timing-function: ease-in-out;
+            }
+            .swiper-button-prev {
+                left: unset;
+                right: var(--swiper-navigation-sides-offset);
+                &:hover {
+                    padding-right: rem(3px);
+                }
+            }
+            .swiper-button-next {
+                left: var(--swiper-navigation-sides-offset);
+                right: unset;
+                &:hover {
+                    padding-left: rem(3px);
+                }
+            }
+        }
+    }
+    &:has(.swiper-slide:hover),
+    &:has(.swiper-slide:focus-within),
+    &:has(.swiper-button-prev:hover),
+    &:has(.swiper-button-prev:focus),
+    &:has(.swiper-button-next:hover),
+    &:has(.swiper-button-next:focus) {
+        .swipe-animation {
+            opacity: $swipe-ani-icon__hover-opa;
+        }
+    }
+    // pause animation on hover
+    @if $swipe-animation__hover-pause {
+        &:has(.services-swiper:hover),
+        &:has(.swiper-button-prev:hover),
+        &:has(.swiper-button-next:hover) {
+            .swipe-animation {
+                svg.swiper-icon-finger {
+                    animation-play-state: paused;
+                }
+            }
+        }
+    }
+}
