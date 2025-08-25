@@ -1,11 +1,11 @@
 ## CMS4
- - [ ] Fügt in euren "**.swiper-container**" ein **CMS4-HTML-Element** ein.
- - [ ] Füge in das **CMS4-HTML-Element** den Inhalt von "**swipe-animation__html.html**" ein.
- - [ ] *Die swiper-buttons (unten) können gerne aus dem HTML-Code entfernt werden.*
+1. Fügt in euren "**.swiper-container**" ein **CMS4-HTML-Element** ein.
+2. Füge in das **CMS4-HTML-Element** den Inhalt von "**swipe-animation__html.html**" ein.
+3. *Die swiper-buttons (unten) können gerne aus dem HTML-Code entfernt werden.*
 
 ## SCSS
- - [ ] **copy & paste** einfach den "**swipe-animation__styles.scss**"-Lachs in deine _page.scss :)
- - [ ] Passe gerne folgende settings in scss an:
+1. **copy & paste** einfach den "**swipe-animation__styles.scss**"-Lachs in deine _page.scss :)
+2. Passe gerne folgende settings in scss an:
 
 **ICONS**
 -  **$swipe-ani-icon__offset:** Unterer Abstand zum Swiper der animierten Icons
@@ -27,3 +27,4 @@
 -  **$swiper-buttons__color:** Farbe der prev/next-buttons
 
 > mfg knaan~ ʕっ•ᴥ•ʔっ
+
